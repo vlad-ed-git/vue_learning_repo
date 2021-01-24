@@ -1,8 +1,10 @@
 <template>
   <h1>{{ title }}</h1>
-  <Modal :header="modal_header" :sale="sale" />
-</template>
-
+  <div v-if="showModal">
+ <Modal :header="modal_header" :sale="sale" @close_modal="toggleModal"/>
+  </div>
+  <button @click="toggleModal">open modal</button>
+ </template> 
 <script>
 import Modal from './components/Modal'
 
@@ -15,8 +17,14 @@ import Modal from './components/Modal'
       return {
          title : 'vlad',
          modal_header : 'props are nice!',
-         sale : true
+         sale : true,
+         showModal : false,
         }
+   },
+   methods : {
+     toggleModal(){
+      this.showModal = !this.showModal;
+     }
    }
    }
 </script>
