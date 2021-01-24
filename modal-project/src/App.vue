@@ -1,10 +1,10 @@
 <template>
   <h1>{{ title }}</h1>
-  <Modal />
+  <Modal :header="modal_header" :sale="sale" />
 </template>
 
 <script>
-import Modal from './components/Modal.vue'
+import Modal from './components/Modal'
 
  export default{
     name: 'App',
@@ -13,13 +13,15 @@ import Modal from './components/Modal.vue'
       },
     data(){
       return {
-         title : 'vlad'
+         title : 'vlad',
+         modal_header : 'props are nice!',
+         sale : true
         }
    }
    }
 </script>
 
-<style>
+<style scoped>
 #app {
   font-family: Avenir, Helvetica, Arial, sans-serif;
   -webkit-font-smoothing: antialiased;
