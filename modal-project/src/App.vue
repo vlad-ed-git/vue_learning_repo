@@ -1,7 +1,8 @@
 <template>
   <h1>{{ title }}</h1>
   <div v-if="showModal">
- <Modal :header="modal_header" :sale="sale" @close_modal="toggleModal"/>
+ <Modal :header="modal_header" :sale="sale" @close_modal="toggleModal">
+ </Modal>
   </div>
   <button @click="toggleModal">open modal</button>
  </template> 
