@@ -41,6 +41,24 @@
       </select>
     </div>
 
+    <div class="mb-3">
+      <label for="id_skills" class="form-label colorBlack">Skills</label>
+      <input
+        @keyup="addSkill"
+        v-model="aSkill"
+        name="skills"
+        type="text"
+        class="form-control colorBlack"
+        id="id_skills"
+        aria-describedby="skillsHelp"
+        required
+      />
+      <div id="skillsHelp" class="form-text">Separate your skills with a comma</div>
+      <div v-for="skill in skills" :key="skill" class="my-2 me-2 badge rounded-pill bg-primary">
+          {{ skill }}
+      </div>
+    </div>
+
     <div class="mb-3 form-check">
       <input
         v-model="terms"
@@ -66,11 +84,22 @@ export default {
          email: '',
          password: '',
          gender: 'unselected',
-         terms: false
+         terms: false,
+         aSkill : "",
+         skills : new Set()
      }
-
-
- }
+ },
+methods: {
+    addSkill(e){
+        let skillLength = this.aSkill.length;
+        if(e.key === ',' && ( skillLength > 1)){
+           let skill = this.aSkill.slice(0, skillLength-1);
+           this.skills.add(skill.trim());
+           this.aSkill = "";
+       } 
+       console.log(this.skills)
+    }
+}
 
 };
 </script>
