@@ -1,5 +1,5 @@
 <template>
-  <form class="my-3 p-3 colorWhiteBg">
+  <form @submit.prevent="formSubmit"  class="my-3 p-3 colorWhiteBg">
     <div class="mb-3">
       <label for="id_email" class="form-label colorBlack">Email</label>
       <input
@@ -11,7 +11,8 @@
         aria-describedby="emailHelp"
         required
       />
-      <div id="emailHelp" class="form-text">Enter a valid email</div>
+      <div id="emailHelp" class="form-text py-0 my-0">Enter a valid email</div>
+      <div class="colorErrors py-0 my-0"> {{ email_errors }}</div>
     </div>
     <div class="mb-3">
       <label for="id_password" class="form-label colorBlack">Password</label>
@@ -23,6 +24,7 @@
         id="id_password"
         required
       />
+      <div class="colorErrors py-0 my-0"> {{ password_errors }}</div>
     </div>
     <div class="mb-3">
       <label for="id_gender" class="form-label colorBlack">Gender</label>
@@ -39,6 +41,7 @@
         <option value="f">Female</option>
         <option value="o">Other</option>
       </select>
+      <div class="colorErrors py-0 my-0"> {{ gender_errors }}</div>
     </div>
 
     <div class="mb-3">
@@ -59,6 +62,7 @@
               {{ skill }}
            </span>
       </div>
+      <div class="colorErrors py-0 my-0"> {{ skills_errors }}</div>
     </div>
 
     <div class="mb-3 form-check">
@@ -73,8 +77,9 @@
       <label class="form-check-label colorBlack" for="id_agree_terms"
         >Agree to terms of service.</label
       >
+      <div class="colorErrors py-0 my-0"> {{ terms_errors }}</div>
     </div>
-    <button type="button" class="btn btn-primary my-2">Submit</button>
+    <button type="submit" class="btn btn-primary my-2">Submit</button>
   </form>
 </template>
 
@@ -84,11 +89,16 @@ export default {
  data(){
      return {
          email: '',
+         email_errors : '',
          password: '',
+         password_errors : '',
          gender: 'unselected',
+         gender_errors : '',
          terms: false,
+         terms_errors : '',
          aSkill : "",
-         skills : new Set()
+         skills : new Set(),
+         skills_errors : '',
      }
  },
 methods: {
@@ -103,6 +113,21 @@ methods: {
     },
     deleteSkill(skill){
         this.skills.delete(skill);
+    },
+    formSubmit(){
+        if(this.email.length < 3){
+            this.email_errors = 'please enter an email';
+        }
+        if(this.password.length < 6){
+            this.password_errors = 'password must be at least 6 characters long';
+        }
+        if(this.gender == 'unselected'){
+            this.gender_errors = 'please specify your gender'
+        }
+        if(this.skills.size == 0){
+            this.skills_errors = 'please add at least 1 skill';
+        }
+        
     }
 }
 

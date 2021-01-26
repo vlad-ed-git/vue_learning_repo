@@ -36,4 +36,8 @@ body{
 .colorWhiteBg{
   background-color: #fff;
 }
+
+.colorErrors{
+  color : #ff0000;
+}
 </style>
