@@ -55,7 +55,9 @@
       />
       <div id="skillsHelp" class="form-text">Separate your skills with a comma</div>
       <div v-for="skill in skills" :key="skill" class="my-2 me-2 badge rounded-pill bg-primary">
-          {{ skill }}
+          <span @click="deleteSkill(skill)">
+              {{ skill }}
+           </span>
       </div>
     </div>
 
@@ -98,6 +100,9 @@ methods: {
            this.aSkill = "";
        } 
        console.log(this.skills)
+    },
+    deleteSkill(skill){
+        this.skills.delete(skill);
     }
 }
 
