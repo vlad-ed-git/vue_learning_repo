@@ -54,7 +54,6 @@
         class="form-control colorBlack"
         id="id_skills"
         aria-describedby="skillsHelp"
-        required
       />
       <div id="skillsHelp" class="form-text">Separate your skills with a comma</div>
       <div v-for="skill in skills" :key="skill" class="my-2 me-2 badge rounded-pill bg-primary">
@@ -99,6 +98,7 @@ export default {
          aSkill : "",
          skills : new Set(),
          skills_errors : '',
+         form_errors: false,
      }
  },
 methods: {
@@ -116,16 +116,23 @@ methods: {
     },
     formSubmit(){
         if(this.email.length < 3){
+            this.form_errors = true;
             this.email_errors = 'please enter an email';
         }
         if(this.password.length < 6){
+            this.form_errors = true;
             this.password_errors = 'password must be at least 6 characters long';
         }
         if(this.gender == 'unselected'){
+            this.form_errors = true;
             this.gender_errors = 'please specify your gender'
         }
         if(this.skills.size == 0){
+            this.form_errors = true;
             this.skills_errors = 'please add at least 1 skill';
+        }
+        if(!this.form_errors){
+            alert('your are in!')
         }
         
     }
