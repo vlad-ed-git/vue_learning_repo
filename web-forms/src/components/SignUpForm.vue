@@ -3,6 +3,7 @@
     <div class="mb-3">
       <label for="id_email" class="form-label colorBlack">Email</label>
       <input
+        v-model="email"
         name="email"
         type="email"
         class="form-control colorBlack"
@@ -15,6 +16,7 @@
     <div class="mb-3">
       <label for="id_password" class="form-label colorBlack">Password</label>
       <input
+         v-model="password"
         type="password"
         name="password"
         class="form-control"
@@ -25,6 +27,7 @@
     <div class="mb-3">
       <label for="id_gender" class="form-label colorBlack">Gender</label>
       <select
+        v-model="gender"
         id="id_gender"
         name="gender"
         class="form-select colorBlack"
@@ -40,10 +43,12 @@
 
     <div class="mb-3 form-check">
       <input
+        v-model="terms"
         type="checkbox"
         name="agree_terms"
         class="form-check-input"
         id="id_agree_terms"
+        required
       />
       <label class="form-check-label colorBlack" for="id_agree_terms"
         >Agree to terms of service.</label
@@ -54,7 +59,20 @@
 </template>
 
 <script>
-export default {};
+export default {
+
+ data(){
+     return {
+         email: '',
+         password: '',
+         gender: 'unselected',
+         terms: false
+     }
+
+
+ }
+
+};
 </script>
 
 <style>
